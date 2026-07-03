@@ -2,12 +2,14 @@
   "name": "pi-euro-converter",
   "version": "1.0.0",
   "description": "Pi footer extension that shows the running session cost in euros instead of dollars.",
-  "keywords": ["pi-package"],
+  "keywords": [
+    "pi-package"
+  ],
   "license": "MIT",
   "author": "MitchelliJ",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/pi-euro-converter.git"
+    "url": "https://github.com/MitchelliJ/pi-euro-converter.git"
   },
   "files": [
     "extensions",
@@ -15,6 +17,8 @@
     "LICENSE"
   ],
   "pi": {
-    "extensions": ["./extensions"]
+    "extensions": [
+      "./extensions"
+    ]
   }
 }

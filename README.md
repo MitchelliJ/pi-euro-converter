@@ -7,21 +7,13 @@ copy showing the running session cost in **euros** instead of US dollars.
   [Frankfurter API](https://www.frankfurter.app) (free, no API key).
 - Cached to `~/.pi/agent/euro-rate.json`; the latest cached rate is reused when
   offline.
-- Mirrors pi's built-in footer: pwd + git branch + session name, `↑↓` tokens,
-  `R`/`W` cache, `CH%` cache-hit rate, context `%`/window + `(auto)` indicator,
-  model + provider + thinking level, plus other extensions' status lines.
+- Mirrors pi's built-in footer.
 - Euro amount rounded to 2 decimals.
 
 ## Install
 
 ```bash
 pi install git:github.com/YOUR_USERNAME/pi-euro-converter
-```
-
-Or pin to a tag/commit:
-
-```bash
-pi install git:github.com/YOUR_USERNAME/pi-euro-converter@v1.0.0
 ```
 
 Try without installing:

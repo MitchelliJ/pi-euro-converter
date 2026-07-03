@@ -115,8 +115,10 @@ export default function (pi: ExtensionAPI) {
 	}
 
 	// Best-effort detection of auto-compaction from settings files (project
-	// overrides global). Returns true unless explicitly disabled.
+	// overrides global). Cached per session so we don't hit disk on every render.
+	let cachedAutoCompact: boolean | undefined;
 	function autoCompactionEnabled(cwd: string): boolean {
+		if (cachedAutoCompact !== undefined) return cachedAutoCompact;
 		const read = (file: string): boolean | undefined => {
 			try {
 				const parsed = JSON.parse(readFileSync(file, "utf8"));
@@ -130,27 +132,16 @@ export default function (pi: ExtensionAPI) {
 			return undefined;
 		};
 		const project = read(join(cwd, ".pi", "settings.json"));
-		if (project !== undefined) return project;
+		if (project !== undefined) return (cachedAutoCompact = project);
 		const globalS = read(join(configDir, "settings.json"));
-		if (globalS !== undefined) return globalS;
-		return true; // pi's default
+		return (cachedAutoCompact = globalS ?? true); // pi's default
 	}
 
 	pi.on("session_start", (event, ctx) => {
 		if (ctx.mode !== "tui") return;
 
+		cachedAutoCompact = undefined; // reset per session
 		loadCachedRateSync();
-		void refreshRate().then(() => {
-			// first fetch completed; nudge a re-render so the placeholder clears
-			try {
-				ctx.ui.setFooter((tui) => {
-					tui.requestRender();
-					return { invalidate() {}, render: () => [] };
-				});
-			} catch {
-				// ignore; the real setFooter below rebinds and re-renders
-			}
-		});
 
 		ctx.ui.setFooter((tui, theme, footerData) => {
 			const unsub = footerData.onBranchChange(() => tui.requestRender());

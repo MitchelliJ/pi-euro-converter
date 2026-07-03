@@ -13,13 +13,19 @@ copy showing the running session cost in **euros** instead of US dollars.
 ## Install
 
 ```bash
-pi install git:github.com/YOUR_USERNAME/pi-euro-converter
+pi install git:github.com/MitchelliJ/pi-euro-converter
+```
+
+Or pin to a tag/commit:
+
+```bash
+pi install git:github.com/MitchelliJ/pi-euro-converter@v1.0.1
 ```
 
 Try without installing:
 
 ```bash
-pi -e git:github.com/YOUR_USERNAME/pi-euro-converter
+pi -e git:github.com/MitchelliJ/pi-euro-converter
 ```
 
 After installing, run `/reload` in pi (or restart it).
@@ -27,7 +33,7 @@ After installing, run `/reload` in pi (or restart it).
 ## Uninstall
 
 ```bash
-pi remove git:github.com/YOUR_USERNAME/pi-euro-converter
+pi remove git:github.com/MitchelliJ/pi-euro-converter
 ```
 
 ## License
